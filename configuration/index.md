@@ -7,4 +7,6 @@ The Gemforge configuration file - `gemforge.config.cjs` - tells how Gemforge how
 
 The default [configuration file template](https://github.com/gemstation/gemforge/blob/master/templates/gemforge.config.cjs) contains all possible configuration options as well as accompanying comments explaining their purpose.
 
-Nearly all configuration options are mandatory, as this then makes everything explicit, reducing the chance of errors.
+!!!
+Note: ALL configuration options are mandatory, as this then makes everything explicit, reducing the chance of errors.
+!!!

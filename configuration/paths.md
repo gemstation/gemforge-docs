@@ -32,7 +32,7 @@ module.exports = {
       // deployments JSON file
       deployments: 'gemforge.deployments.json',
     },
-    // library source code
+    // library files
     lib: {
       // diamond library
       diamond: 'lib/diamond-2-hardhat',
@@ -41,4 +41,16 @@ module.exports = {
   ...
 }
 ```
+
+## Generated files
+
+The `generated.solidity` folder path should be inside the same folder containing your project's smart contracts so that everything gets compiled together.
+
+The `generated.solidity` folder path is for holding files which are used by Gemforge internally.
+
+The `generated.deployments` file will contain the details of deployed Diamond contracts, indexed by network chain id. You may wish to check this file into version control in order to store these details for consumption elsewhere.
+
+## Library files
+
+The `lib.diamond` folder path should point to where the contents of the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) repository can be found. This is required for the code which Gemforge generates.
 

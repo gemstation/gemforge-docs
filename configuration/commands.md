@@ -4,7 +4,7 @@ order: -2
 
 # Commands
 
-Gemforge executes certain commands via the underlying [development environment](../dev-environments/). 
+Gemforge executes certain commands via the underlying [development framework](../frameworks.md). 
 
 These must be configured as follows:
 
