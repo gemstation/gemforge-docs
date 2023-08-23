@@ -9,8 +9,7 @@ order: -4
 * Homepage: https://gemforge.xyz
 * Github repository: https://github.com/gemstation/gemforge
 * NPM package: https://npmjs.com/package/gemforge
-* Foundry sample project: https://github.com/gemstation/contracts-foundry
-* Hardhat sample project: https://github.com/gemstation/contracts-hardhat
+* Twitter: https://twitter.com/hiddentao
 
 
 **Diamond Standard**

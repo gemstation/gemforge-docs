@@ -6,12 +6,12 @@ branding:
   # label:
   logo: static/logo.png
 links:
-- text: gemforge.xyz
-  link: https://gemforge.xyz
 - text: Github
   link: https://github.com/gemstation/gemforge
 - text: NPM
   link: https://npmjs.com/package/gemforge
+- text: Twitter
+  link: https://twitter.com/hiddentao
 favicon: static/favicon.png
 edit:
   repo: "https://github.com/gemstation/gemforge-docs"
