@@ -17,6 +17,8 @@ Gemforge is built with Foundry primarily in mind. However, sample projects for b
 * Foundry: https://github.com/gemstation/contracts-foundry
 * Hardhat: https://github.com/gemstation/contracts-hardhat
 
+The sample projects also demonstrate how to use the post-deploy [hook](./configuration/hooks.md) to perform Etherscan verification.
+
 _Note: The sample projects both use Git submodules to load in essential third-party libraries._
 
 

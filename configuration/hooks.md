@@ -46,3 +46,5 @@ module.exports = {
 // postDeployScript.js
 console.log(`Deployed to chain: ${process.env.GEMFORGE_DEPLOY_CHAIN_ID}`);
 ```
+
+In the sample project the post-deploy hook is used to [perform Etherscan verification](https://github.com/gemstation/contracts-foundry/blob/master/scripts/verify.js).
