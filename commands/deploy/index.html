@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.1.0.746142096022">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.1.0.746144309711">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.1.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>deploy | Gemforge</title>
     <meta name="title" content="deploy | Gemforge">
-    <meta name="description" content="The deploy command deploys the Diamond contracts to the selected network.">
+    <meta name="description" content="The deploy command both deploys and upgrades Diamond contracts to a network.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://gemforge.xyz/commands/deploy/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gemforge.xyz/commands/deploy/">
     <meta property="og:title" content="deploy | Gemforge">
-    <meta property="og:description" content="The deploy command deploys the Diamond contracts to the selected network.">
+    <meta property="og:description" content="The deploy command both deploys and upgrades Diamond contracts to a network.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gemforge.xyz/commands/deploy/">
     <meta property="twitter:title" content="deploy | Gemforge">
-    <meta property="twitter:description" content="The deploy command deploys the Diamond contracts to the selected network.">
+    <meta property="twitter:description" content="The deploy command both deploys and upgrades Diamond contracts to a network.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.1.0.746142096022" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.1.0.746144309711" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.1.0.746142096022" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.1.0.746144309711" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.1.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.1.0.746142096022" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.1.0.746142096022" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.1.0.746144309711" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.1.0.746144309711" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -188,8 +188,8 @@
         <span>deploy</span>
     </h1>
 </doc-anchor-target>
-<p>The <code v-pre>deploy</code> command deploys the Diamond contracts to the selected network.</p>
-<p>If no previous deployent can be detected it will do a new one, otherwise it will automatically work out which facets and methods have changed (by comparing to the on-chain bytecode) and upgrade the on-chain Diamond proxy accordingly.</p>
+<p>The <code v-pre>deploy</code> command both deploys <strong>and</strong> upgrades Diamond contracts to a network.</p>
+<p>If no previous deployment is detected (see below) it will do a new one, otherwise it will automatically work out which facets and methods have changed (by comparing to the on-chain bytecode) and upgrade the on-chain proxy accordingly.</p>
 <p>To run it:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">gemforge deploy</code></pre>
@@ -199,11 +199,17 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">gemforge deploy &lt;network name&gt;</code></pre>
 </doc-codeblock></div>
-<p>Once deployment has succeeded a <code v-pre>gemforge.deployments.json</code> file will be created. This will contain the addresses of all the deployed contracts (proxy, facets, initialization contract) along with their constructor arguments and deployment transaction hashes.</p>
-<p>This file can then be committed to version control and/or used in scripts or NPM package exports, making it easy for clients of your contracts to know where to find your contracts for a given chain.</p>
+<doc-anchor-target id="deployment-records">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#deployment-records">#</doc-anchor-trigger>
+        <span>Deployment records</span>
+    </h2>
+</doc-anchor-target>
+<p>Once deployment has succeeded a <code v-pre>gemforge.deployments.json</code> file will be created. This contains the addresses of all the deployed contracts along with their constructor arguments and deployment transaction hashes, for each network that has been deployed to.</p>
 <p>An example <code v-pre>gemforge.deployments.json</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-json"><code v-pre class="language-json">{
+  // local
   &quot;31337&quot;: [
     {
       &quot;name&quot;: &quot;DiamondProxy&quot;,
@@ -217,28 +223,19 @@
         ]
       }
     },
-    {
-      &quot;name&quot;: &quot;ERC20Facet&quot;,
-      &quot;fullyQualifiedName&quot;: &quot;ERC20Facet.sol:ERC20Facet&quot;,
-      &quot;sender&quot;: &quot;0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266&quot;,
-      &quot;txHash&quot;: &quot;0x6caf1baeee6815a547e611404eea1c303f9142e4a5a08a9b8e97ab5fbdcc903a&quot;,
-      &quot;contract&quot;: {
-        &quot;address&quot;: &quot;0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512&quot;,
-        &quot;constructorArgs&quot;: []
-      }
-    },
-    {
-      &quot;name&quot;: &quot;InitDiamond&quot;,
-      &quot;fullyQualifiedName&quot;: &quot;InitDiamond.sol:InitDiamond&quot;,
-      &quot;sender&quot;: &quot;0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266&quot;,
-      &quot;txHash&quot;: &quot;0x89eb25a81f46ac3be515e5aaaba385a6eaeb1c30a26d7cfff72aad090c99623a&quot;,
-      &quot;contract&quot;: {
-        &quot;address&quot;: &quot;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&quot;,
-        &quot;constructorArgs&quot;: []
-      }
-    }
+    // ...
+  ],
+  // mainnet
+  &quot;1&quot;: [
+    // ...
   ]
 }</code></pre>
+</doc-codeblock></div>
+<p>Subsequent calls to the <code v-pre>deploy</code> command will result in this file being checked to see if a fresh deployment is needed, or if an upgrade should be performed on the given network.</p>
+<p>Gemforge performs a thorough check, i.e. it actually attempts to query the proxy contract on the network to see if it is indeed a Diamond deployment.</p>
+<p>If instead, you wish to force a fresh deployment, then simply append the <code v-pre>-n</code> or <code v-pre>--new</code> option to the command:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy -n</code></pre>
 </doc-codeblock></div>
 
                                 
