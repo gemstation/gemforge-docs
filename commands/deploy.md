@@ -4,7 +4,7 @@ order: -3
 
 # deploy
 
-The `deploy` command both deploys **and** upgrades Diamond contracts to a network.
+The `deploy` command both deploys **and** upgrades Diamond contracts on a network.
 
 If no previous deployment is detected (see below) it will do a new one, otherwise it will automatically work out which facets and methods have changed (by comparing to the on-chain bytecode) and upgrade the on-chain proxy accordingly.
 
