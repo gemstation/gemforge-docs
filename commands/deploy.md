@@ -62,3 +62,11 @@ If instead, you wish to force a fresh deployment, then simply append the `-n` or
 ```shell
 gemforge deploy -n
 ```
+
+## Etherscan verification
+
+To verify your contracts on Etherscan you can use [post-deploy hooks](../configuration/hooks.md). Examples of this can be found in the 
+example project repos:
+
+* Foundry: https://github.com/gemstation/contracts-foundry
+* Hardhat: https://github.com/gemstation/contracts-hardhat

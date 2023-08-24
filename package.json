@@ -1,0 +1,25 @@
+{
+  "name": "gemforge-docs",
+  "version": "1.0.0",
+  "description": "Documentation website for Gemforge",
+  "main": "index.js",
+  "scripts": {
+    "dev": "retype start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gemstation/gemforge-docs.git"
+  },
+  "keywords": [
+    "gemforge"
+  ],
+  "author": "Ramesh Nair <ram@hiddentao.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gemstation/gemforge-docs/issues"
+  },
+  "homepage": "https://github.com/gemstation/gemforge-docs#readme",
+  "devDependencies": {
+    "retype": "^0.2.0"
+  }
+}
