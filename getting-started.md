@@ -80,8 +80,11 @@ gemforge init --hardhat
 ```
 +++
 
-The `gemforge.config.cjs` file will have been created in the current folder. You will probably need to edit this file to [customize 
-it](configuration) for your project. 
+The `gemforge.config.cjs` file will have been created in the current folder. You will probably need to edit this file to [customize it](configuration) for your project. 
+
+!!!
+Note: Gemforge assumes that your project uses the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) reference repository for the core Diamond Standard libraries.
+!!!
 
 ===
 
