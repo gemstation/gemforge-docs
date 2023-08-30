@@ -83,7 +83,7 @@ gemforge init --hardhat
 The `gemforge.config.cjs` file will have been created in the current folder. You will probably need to edit this file to [customize it](configuration) for your project. 
 
 !!!
-Note: Gemforge assumes that your project uses the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) reference repository for the core Diamond Standard libraries.
+Note: Gemforge assumes that your project uses the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) reference repository for the core Diamond Standard libraries. It also assumes that the core facets - [DiamondLoupe](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondLoupeFacet.sol), [DiamondCut](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol), [Ownership](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/OwnershipFacet.sol) - are part of your diamond.
 !!!
 
 ===

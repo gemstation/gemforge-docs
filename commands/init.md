@@ -6,7 +6,7 @@ order: 0
 
 The `init` command is used initialize a Gemforge configuration file for an existing Diamond contract project of yours. This will then allow you to run Gemforge commands against said project.
 
-Gemforge assumes that your project uses the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) reference repository for the core Diamond Standard libraries.
+Gemforge assumes that your project uses the [diamond-2-hardhat](https://github.com/mudgen/diamond-2-hardhat) reference repository for the core Diamond Standard libraries. It also assumes that the core facets - [DiamondLoupe](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondLoupeFacet.sol), [DiamondCut](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol), [Ownership](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/OwnershipFacet.sol) - are part of your diamond.
 
 To create the default config file:
 

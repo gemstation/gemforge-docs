@@ -57,6 +57,10 @@ Subsequent calls to the `deploy` command will result in this file being checked 
 
 Gemforge performs a thorough check, i.e. it actually attempts to query the proxy contract on the network to see if it is indeed a Diamond deployment.
 
+!!!
+In order for upgrades to work, Gemforge assumes that the core facets - [DiamondLoupe](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondLoupeFacet.sol), [DiamondCut](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol), [Ownership](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/OwnershipFacet.sol) - are part of your diamond. If you used Gemforge to deploy the initial diamond then this will already be taken care of for you.
+!!!
+
 If instead, you wish to force a fresh deployment, then simply append the `-n` or `--new` option to the command:
 
 ```shell
