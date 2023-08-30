@@ -16,7 +16,7 @@ It's best to install Gemforge globally in your Node environment, depending on wh
 
 +++ pnpm
 ```shell
-pnpm add --global gemforge`
+pnpm add --global gemforge
 ```
 +++ npm
 ```shell
