@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.2.0.746752195791">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.2.0.746795564940">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.2.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.2.0.746752195791" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.2.0.746795564940" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.2.0.746752195791" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.2.0.746795564940" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.2.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.2.0.746752195791" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.2.0.746752195791" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.2.0.746795564940" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.2.0.746795564940" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -198,11 +198,40 @@ module.exports = {
     publicMethods: false,
     // The diamond initialization contract - to be called when first deploying the diamond.
     init: 'InitDiamond',
+    // Names of core facet contracts - these will not be modified/removed once deployed and are also reserved names.
+    // This default list is taken from the diamond-2-hardhat library.
+    // NOTE: we recommend not removing any of these existing names unless you know what you are doing.
+    coreFacets: [
+      'OwnershipFacet',
+      'DiamondCutFacet',
+      'DiamondLoupeFacet',
+    ],
   },
   ...
 }</code></pre>
 </doc-codeblock></div>
-<p>Note that the initialization contract - <code v-pre>diamond.init</code> config - must be a uniquely named contract so that Gemforge can easily find it in the artifacts folder.</p>
+<doc-anchor-target id="initialization-contract">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initialization-contract">#</doc-anchor-trigger>
+        <span>Initialization contract</span>
+    </h2>
+</doc-anchor-target>
+<p>The initialization contract - <code v-pre>diamond.init</code> config - must be a uniquely named contract so that Gemforge can easily find it in the artifacts folder.</p>
+<p>If this value is empty then an initialization call will not be made.</p>
+<doc-anchor-target id="core-facets">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#core-facets">#</doc-anchor-trigger>
+        <span>Core facets</span>
+    </h2>
+</doc-anchor-target>
+<p>Core facets are contracts whose selectors are considered sacrosanct such that they will never be removed from the diamond in upgrade by Gemforge. Gemforge will also complain if you create a contract that has one of these names.</p>
+<p>The default core facets in the config file are the ones provided by the <a href="https://github.com/mudgen/diamond-2-hardhat">standard diamond library</a> and are essential to the correct working of the deployment and upgrade mechanisms:</p>
+<ul>
+<li><code v-pre>DiamondLoupe</code> - An interface for querying the diamond. Essential to making upgrades work.</li>
+<li><code v-pre>DiamondCut</code> - The upgrade mechanism for the diamond.</li>
+<li><code v-pre>Ownership</code> - Verification and transfer of diamond ownership.</li>
+</ul>
+<p><strong>Unless you really know what you&#x27;re doing we recommend leaving this array unchanged.</strong></p>
 
                                 
                                 <!-- Required only on API pages -->
