@@ -97,3 +97,5 @@ interface IDiamondProxy {
   function createGame(GameParams memory params); // will successfully compile!
 }
 ```
+
+For a working example of the above, check out [the demo project](https://github.com/gemstation/contracts-foundry).
