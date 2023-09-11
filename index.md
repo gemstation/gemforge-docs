@@ -22,3 +22,6 @@ By automating almost all aspects of this boilerplate code whilst still remaining
 Gemforge only supports Solidity. Other EVM languages are not currently supported.
 !!!
 
+## Who is using Gemforge?
+
+* [WarMosaic](https://github.com/WarMosaic/contracts)

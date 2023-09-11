@@ -50,7 +50,7 @@ Commands:
 
 ==- Create a new project
 
-Gemforge provides example projects for both **LINK: Hardhat** and **LINK: Foundry**.
+Gemforge provides [example projects](./frameworks.md) to get you started.
 
 These can be cloned and setup in an empty folder using the [scaffold](commands/scaffold.md) command:
 
