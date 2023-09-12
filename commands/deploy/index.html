@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.4.1.747761304620">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.4.1.747849985947">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.4.1">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.4.1.747761304620" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.4.1.747849985947" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.4.1.747761304620" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.4.1.747849985947" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.4.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.4.1.747761304620" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.4.1.747761304620" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.4.1.747849985947" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.4.1.747849985947" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -230,8 +230,8 @@
   ]
 }</code></pre>
 </doc-codeblock></div>
-<p>Subsequent calls to the <code v-pre>deploy</code> command will result in this file being checked to see if a fresh deployment is needed, or if an upgrade should be performed on the given network.</p>
-<p>Gemforge performs a thorough check, i.e. it actually attempts to query the proxy contract on the network to see if it is indeed a Diamond deployment.</p>
+<p>Subsequent calls to the <code v-pre>deploy</code> command will result in this file being checked to see if a deployment already exists on the given network and can thus be upgraded, or if a new deployment is needed.</p>
+<p>When checking for an existing deployment, Gemforge performs a thorough check - i.e. it actually attempts to query the proxy contract on the network and to see if it is indeed a Diamond deployment.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -249,22 +249,30 @@
         </div>
     </div>
 </div>
-<p>If instead, you wish to force a fresh deployment, then simply append the <code v-pre>-n</code> or <code v-pre>--new</code> option to the command:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy -n</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="etherscan-verification">
+<doc-anchor-target id="fresh-deployments">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#etherscan-verification">#</doc-anchor-trigger>
-        <span>Etherscan verification</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#fresh-deployments">#</doc-anchor-trigger>
+        <span>Fresh deployments</span>
     </h2>
 </doc-anchor-target>
-<p>To verify your contracts on Etherscan you can use <a href="../../configuration/hooks/">post-deploy hooks</a>. Examples of this can be found in the
-example project repos:</p>
-<ul>
-<li>Foundry: <a href="https://github.com/gemstation/contracts-foundry">https://github.com/gemstation/contracts-foundry</a></li>
-<li>Hardhat: <a href="https://github.com/gemstation/contracts-hardhat">https://github.com/gemstation/contracts-hardhat</a></li>
-</ul>
+<p>You can bypass Gemforge&#x27;s default behaviour and force a fresh deployment of the Diamond using the <code v-pre>--new</code> CLI argument:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy --new</code></pre>
+</doc-codeblock></div>
+<p>This will force a new deployment of the Diamond and associated facets, disregarding any existing on-chain Diamond. Existing deployment srecord for the Diamond contract as well as facets will be replaced with new ones.</p>
+<p>Sometimes you may simply wish to reset an existing Diamond to a fresh state, i.e. replace all of its selectors with the current facet build output. To do this you can use the <code v-pre>--clean</code> argument:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy --clean</code></pre>
+</doc-codeblock></div>
+<p>This will remove all non-core facet selectors from the existing on-chain Diamond as a first step, thus causing the current facet contracts to be deployed to the diamond afresh. The existing deployment record for the Diamond contract will remain unchanged, but facet deployment records will be replaced.</p>
+<doc-anchor-target id="custom-scripts">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#custom-scripts">#</doc-anchor-trigger>
+        <span>Custom scripts</span>
+    </h2>
+</doc-anchor-target>
+<p>If you wish to run custom scripts during the deployment process, then this can be accomplished using <a href="../../configuration/hooks/">hooks</a>. Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.</p>
+<p>See the section on <a href="../../advanced/etherscan/">verifying your contracts on Etherscan</a> for an example of hooks in action.</p>
 
                                 
                                 <!-- Required only on API pages -->
