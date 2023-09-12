@@ -53,24 +53,34 @@ An example `gemforge.deployments.json`:
 }
 ```
 
-Subsequent calls to the `deploy` command will result in this file being checked to see if a fresh deployment is needed, or if an upgrade should be performed on the given network.
+Subsequent calls to the `deploy` command will result in this file being checked to see if a deployment already exists on the given network and can thus be upgraded, or if a new deployment is needed.
 
-Gemforge performs a thorough check, i.e. it actually attempts to query the proxy contract on the network to see if it is indeed a Diamond deployment.
+When checking for an existing deployment, Gemforge performs a thorough check - i.e. it actually attempts to query the proxy contract on the network and to see if it is indeed a Diamond deployment.
 
 !!!
 In order for upgrades to work, Gemforge assumes that the core facets - [DiamondLoupe](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondLoupeFacet.sol), [DiamondCut](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol), [Ownership](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/OwnershipFacet.sol) - are part of your diamond. If you used Gemforge to deploy the initial diamond then this will already be taken care of for you.
 !!!
 
-If instead, you wish to force a fresh deployment, then simply append the `-n` or `--new` option to the command:
+## Fresh deployments
+
+You can bypass Gemforge's default behaviour and force a fresh deployment of the Diamond using the `--new` CLI argument:
 
 ```shell
-gemforge deploy -n
+gemforge deploy --new
 ```
 
-## Etherscan verification
+This will force a new deployment of the Diamond and associated facets, disregarding any existing on-chain Diamond. Existing deployment srecord for the Diamond contract as well as facets will be replaced with new ones.
 
-To verify your contracts on Etherscan you can use [post-deploy hooks](../configuration/hooks.md). Examples of this can be found in the 
-example project repos:
+Sometimes you may simply wish to reset an existing Diamond to a fresh state, i.e. replace all of its selectors with the current facet build output. To do this you can use the `--clean` argument:
 
-* Foundry: https://github.com/gemstation/contracts-foundry
-* Hardhat: https://github.com/gemstation/contracts-hardhat
+```shell
+gemforge deploy --clean
+```
+
+This will remove all non-core facet selectors from the existing on-chain Diamond as a first step, thus causing the current facet contracts to be deployed to the diamond afresh. The existing deployment record for the Diamond contract will remain unchanged, but facet deployment records will be replaced.
+
+## Custom scripts
+
+If you wish to run custom scripts during the deployment process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.
+
+See the section on [verifying your contracts on Etherscan](../advanced/etherscan.md) for an example of hooks in action.
