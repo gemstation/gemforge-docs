@@ -48,8 +48,6 @@ Commands:
 
 ## Step 2 - Project setup
 
-==- Create a new project
-
 Gemforge provides [example projects](./frameworks.md) to get you started.
 
 These can be cloned and setup in an empty folder using the [scaffold](commands/scaffold.md) command:
@@ -63,8 +61,6 @@ gemforge scaffold --folder /path/to/new_or_empty_folder
 gemforge scaffold --hardhat --folder /path/to/new_or_empty_folder
 ```
 +++
-
-==-
 
 ==- Use with an existing project
 
@@ -96,16 +92,21 @@ To generate all necessary Diamond code and compile your project inside the proje
 gemforge build
 ```
 
-
 ## Step 4 - Deploy contracts
 
 Assuming a local test node is running at http://localhost:8545, use the following to deploy your Diamond code and facets to it: 
 
 ```shell
-gemforge deploy
+gemforge deploy local
 ```
 
 At this point you've just built and deployed a Diamond Standard project to your local test node using Gemforge!
+
+## Step 5 - Next steps
+
+* [Add facets and methods](./development/facets.md)
+* [Update the storage structure](./development/storage.md)
+* [Customize initialization](./development/initialization.md)
 
 
 

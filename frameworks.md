@@ -3,7 +3,7 @@ icon: code
 order: -5
 ---
 
-# Development frameworks
+# Supported frameworks
 
 At present the following two Solidity development frameworks are supported:
 
@@ -19,8 +19,8 @@ Gemforge is built with Foundry primarily in mind. However, sample projects for b
 
 Both sample projects also demonstrate the following:
 
-* [Custom structs](./advanced/custom-structs.md)
-* [Etherscan verification](./advanced/etherscan.md)
+* [Custom structs](./development/custom-structs.md)
+* [Etherscan verification](./development/etherscan.md)
 
 !!!
 The sample projects both use Git submodules to load in essential third-party libraries.

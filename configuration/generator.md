@@ -25,5 +25,5 @@ module.exports = {
 
 The `generator.proxyInterface.imports` array lists files which should be imported within the [generated diamond proxy interface](../commands/build.md) code.
 
-For example, you need to use this when dealing with [custom structs](../advanced/custom-structs.md).
+For example, you need to use this when dealing with [custom structs](../development/custom-structs.md).
 

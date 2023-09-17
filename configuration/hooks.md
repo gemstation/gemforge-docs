@@ -28,7 +28,8 @@ module.exports = {
 
 When Gemforge calls the `preDeploy` and `postDeploy` hooks it will pass through the following environment variables:
 
-* `GEMFORGE_DEPLOY_CHAIN_ID` - chain id of network being deployed to
+* `GEMFORGE_DEPLOY_TARGET` - [target](../configuration/targets.md) being deployed
+* `GEMFORGE_DEPLOY_CHAIN_ID` - chain id of [network](../configuration/networks.md) being deployed to
 
 This can then be used in your hooks, e.g we may define a post-deployment script as follows:
 
@@ -44,10 +45,10 @@ module.exports = {
 }
 
 // postDeployScript.js
-console.log(`Deployed to chain: ${process.env.GEMFORGE_DEPLOY_CHAIN_ID}`);
+console.log(`Deployed target: ${process.env.GEMFORGE_DEPLOY_TARGET}`);
 ```
 
-See the section on [verifying your contracts on Etherscan](../advanced/etherscan.md) for a more detailed example of hooks.
+See the section on [verifying your contracts on Etherscan](../development/etherscan.md) for a more detailed example of hooks.
 
 !!!
 If any of the hook scripts fail to execute properly or throw an error then Gemforge will also throw an error.

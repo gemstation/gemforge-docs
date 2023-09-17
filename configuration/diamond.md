@@ -13,11 +13,16 @@ module.exports = {
   diamond: {
     // Whether to include public methods when generating the IDiamondProxy interface. Default is to only include external methods.
     publicMethods: false,
-    // The diamond initialization contract - to be called when first deploying the diamond.
-    init: 'InitDiamond',
+    // OPTIONAL - The diamond initialization contract - to be called when first deploying the diamond.
+    init: {
+      // The diamond initialization contract name
+      contract: 'InitDiamond',
+      // The diamond initialization function name
+      function: 'init',
+    },  
     // Names of core facet contracts - these will not be modified/removed once deployed and are also reserved names.
     // This default list is taken from the diamond-2-hardhat library.
-    // NOTE: we recommend not removing any of these existing names unless you know what you are doing.
+    // NOTE: WE RECOMMEND NOT CHANGING ANY OF THESE EXISTING NAMES UNLESS YOU KNOW WHAT YOU ARE DOING.
     coreFacets: [
       'OwnershipFacet',
       'DiamondCutFacet',
@@ -30,9 +35,7 @@ module.exports = {
 
 ## Initialization contract
 
-The initialization contract - `diamond.init` config - must be a uniquely named contract so that Gemforge can easily find it in the artifacts folder. 
-
-If this value is empty then an initialization call will not be made.
+The initialization contract - `diamond.init` config - is optional, and is only needed if you wish to execute [custom initialization code](../development/initialization.md) on-chain when doing a new deployment of your Diamond.
 
 ## Core facets
 
@@ -44,4 +47,6 @@ The default core facets in the config file are the ones provided by the [standar
 * `DiamondCut` - The upgrade mechanism for the diamond.
 * `Ownership` - Verification and transfer of diamond ownership.
 
-**Unless you really know what you're doing we recommend leaving this array unchanged.**
+!!!
+**Unless you really know what you're doing, we recommend leaving this array unchanged.**
+!!!

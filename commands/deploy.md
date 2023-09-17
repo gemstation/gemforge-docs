@@ -11,51 +11,61 @@ If no previous deployment is detected (see below) it will do a new one, otherwis
 To run it:
 
 ```shell
-gemforge deploy
+gemforge deploy <target>
 ```
 
-This will deploy contracts to the `local` network, which is defined in the default configuration file. 
-
-To deploy to another network, first ensure that [network is defined](../configuration/networks.md) in the configuration. Then run:
-
-```
-gemforge deploy <network name>
-```
+This will deploy contracts for the specified `<target>`, which must be defined in the [targets configuration](../configuration//targets.md). 
 
 ## Deployment records
 
-Once deployment has succeeded a `gemforge.deployments.json` file will be created. This contains the addresses of all the deployed contracts along with their constructor arguments and deployment transaction hashes, for each network that has been deployed to. 
+Once deployment has succeeded a `gemforge.deployments.json` file will be created. This contains the addresses of all the deployed contracts along with their constructor arguments and deployment transaction hashes, for each target that has been deployed to. 
 
 An example `gemforge.deployments.json`:
 
 ```json
 {
-  // local
-  "31337": [
-    {
-      "name": "DiamondProxy",
-      "fullyQualifiedName": "DiamondProxy.sol:DiamondProxy",
-      "sender": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-      "txHash": "0x106fc779d5317edc3947fff0e1ee659e578ea5d59d2910059e7f14b658c4c460",
-      "contract": {
-        "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-        "constructorArgs": [
-          "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-        ]
-      }
-    },
-    // ...
-  ],
-  // mainnet
-  "1": [
-    // ...
-  ]
+  "local": {
+    "chainId": 31337,
+    "contracts": [
+      {
+        "name": "DiamondProxy",
+        "fullyQualifiedName": "contracts/generated/DiamondProxy.sol:DiamondProxy",
+        "sender": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "txHash": "0x4a304d29c18e4e3d9e8194f63d1d4e484304b9079f0d390ac3c06a8790c1494b",
+        "onChain": {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "constructorArgs": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+          ]
+        }
+      },
+      // ...
+    ]
+  },
+  "testnet": {
+    "chainId": 11155111,
+    "contracts": [
+      {
+        "name": "DiamondProxy",
+        "fullyQualifiedName": "contracts/generated/DiamondProxy.sol:DiamondProxy",
+        "sender": "0xb1B6e377aA6ec6928A1D499AE58483B2B99658Ec",
+        "txHash": "0xf2e22d2e01c637cfb0f8996a762574ed15046d5ad745f826b547ee74e1e67f4b",
+        "onChain": {
+          "address": "0xA91C335D79b8401E1df5FA9D5C1D441f963F8eB0",
+          "constructorArgs": [
+            "0xb1B6e377aA6ec6928A1D499AE58483B2B99658Ec"
+          ]
+        }
+      },
+      // ...
+    ]
+  }
 }
 ```
 
-Subsequent calls to the `deploy` command will result in this file being checked to see if a deployment already exists on the given network and can thus be upgraded, or if a new deployment is needed.
+Subsequent calls to the `deploy` command with the same [target](../configuration/targets.md) will result in this file being checked to see if a deployment already exists for the given target and can thus be upgraded, or if a new deployment is needed.
 
-When checking for an existing deployment, Gemforge performs a thorough check - i.e. it actually attempts to query the proxy contract on the network and to see if it is indeed a Diamond deployment.
+When checking for an existing deployment, Gemforge performs a thorough check - i.e. it actually attempts to query the proxy contract on the target's network and to see if it is indeed a Diamond deployment.
 
 !!!
 In order for upgrades to work, Gemforge assumes that the core facets - [DiamondLoupe](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondLoupeFacet.sol), [DiamondCut](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol), [Ownership](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/OwnershipFacet.sol) - are part of your diamond. If you used Gemforge to deploy the initial diamond then this will already be taken care of for you.
@@ -66,15 +76,15 @@ In order for upgrades to work, Gemforge assumes that the core facets - [DiamondL
 You can bypass Gemforge's default behaviour and force a fresh deployment of the Diamond using the `--new` CLI argument:
 
 ```shell
-gemforge deploy --new
+gemforge deploy <target> --new
 ```
 
 This will force a new deployment of the Diamond and associated facets, disregarding any existing on-chain Diamond. Existing deployment srecord for the Diamond contract as well as facets will be replaced with new ones.
 
-Sometimes you may simply wish to reset an existing Diamond to a fresh state, i.e. replace all of its selectors with the current facet build output. To do this you can use the `--clean` argument:
+Sometimes you may simply wish to reset an existing Diamond to a fresh state, i.e. replace all of its selectors with the current facet build output. To do this you can use the `--reset` argument:
 
 ```shell
-gemforge deploy --clean
+gemforge deploy <target> --reset
 ```
 
 This will remove all non-core facet selectors from the existing on-chain Diamond as a first step, thus causing the current facet contracts to be deployed to the diamond afresh. The existing deployment record for the Diamond contract will remain unchanged, but facet deployment records will be replaced.
@@ -83,4 +93,4 @@ This will remove all non-core facet selectors from the existing on-chain Diamond
 
 If you wish to run custom scripts during the deployment process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.
 
-See the section on [verifying your contracts on Etherscan](../advanced/etherscan.md) for an example of hooks in action.
+See the section on [verifying your contracts on Etherscan](../development/etherscan.md) for an example of hooks in action.

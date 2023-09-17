@@ -33,4 +33,4 @@ To see an example of the above generated files in action check out the [sample p
 
 If you wish to run custom scripts during the build process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-build.
 
-See the section on [verifying your contracts on Etherscan](../advanced/etherscan.md) for an example of hooks in action.
+See the section on [verifying your contracts on Etherscan](../development/etherscan.md) for an example of hooks in action.

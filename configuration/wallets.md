@@ -4,7 +4,7 @@ order: -8
 
 # Wallets
 
-Wallets are required for [deploying](../commands/deploy.md) your contracts to a network.
+Wallets are required for deploying to a [target](./targets.md).
 
 They are configured as follows:
 
@@ -44,7 +44,7 @@ module.exports = {
 }
 ```
 
-Each wallet is uniquely named and fully configured as shown above.
+The `words` config parameter for `mnemonic` wallets can either be a string of words or a method which returns the same.
 
 !!!
 Note: At present only the `mnemonic` wallet type is supported. We aim to add more wallet types in future.
