@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.4.1.747849985947">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.748286238348">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 3.4.1">
+    <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
     <title>Networks | Gemforge</title>
     <meta name="title" content="Networks | Gemforge">
-    <meta name="description" content="The available deployment networks must be explicitly specified in the configuration.">
+    <meta name="description" content="Networks (i.e. chains) are required for deploying to a target.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://gemforge.xyz/configuration/networks/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gemforge.xyz/configuration/networks/">
     <meta property="og:title" content="Networks | Gemforge">
-    <meta property="og:description" content="The available deployment networks must be explicitly specified in the configuration.">
+    <meta property="og:description" content="Networks (i.e. chains) are required for deploying to a target.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gemforge.xyz/configuration/networks/">
     <meta property="twitter:title" content="Networks | Gemforge">
-    <meta property="twitter:description" content="The available deployment networks must be explicitly specified in the configuration.">
+    <meta property="twitter:description" content="Networks (i.e. chains) are required for deploying to a target.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.4.1.747849985947" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.748286238348" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.4.1.747849985947" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.4.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.4.1.747849985947" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.4.1.747849985947" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.748286238348" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.748286238348" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.748286238348" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -187,7 +187,8 @@
         <span>Networks</span>
     </h1>
 </doc-anchor-target>
-<p>The available deployment networks must be explicitly specified in the configuration. Gemforge does not rely on any networks you&#x27;ve configured elsewhere in your development environment.</p>
+<p>Networks (i.e. chains) are required for deploying to a <a href="../targets/">target</a>.</p>
+<p>They are configured as follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">// gemforge.config.cjs
 module.exports = {
@@ -197,25 +198,17 @@ module.exports = {
     local: {
       // RPC endpoint URL
       rpcUrl: 'http://localhost:8545',
-      // Wallet to use for deployment
-      wallet: 'wallet1',
     },
     // Sepolia test network
     sepolia: {
       // RPC endpoint URL
       rpcUrl: () =&gt; process.env.SEPOLIA_RPC_URL,
-      // Wallet to use for deployment
-      wallet: 'wallet2',
     }
   }
   ...
 }</code></pre>
 </doc-codeblock></div>
-<p>The <code v-pre>wallet</code> value must refer to a valid, defined <a href="../wallets/">wallet</a>. If not then Gemforge will complain.</p>
-<p>To deploy contracts to one of the specified networks simply use it&#x27;s name with the <a href="../../commands/deploy/">deploy</a> command, e.g to deploy to the <code v-pre>sepolia</code> network defined in the configuration file:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy sepolia</code></pre>
-</doc-codeblock></div>
+<p>The <code v-pre>rpcUrl</code> value can either be a URL string or a method which returns the same.</p>
 
                                 
                                 <!-- Required only on API pages -->
