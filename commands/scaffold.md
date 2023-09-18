@@ -4,7 +4,9 @@ order: -1
 
 # scaffold
 
-The `scaffold` command is used to setup a minimal project using Gemforge as a starting point for one's own project. This saves you time since everything will already be setup for you to start building with.
+The `scaffold` command is used to setup a minimal demo project with Gemforge, as a starting point for one's own project. 
+
+This saves you time since everything will already be setup for you to start building with.
 
 To setup the scaffolding in the current folder:
 
