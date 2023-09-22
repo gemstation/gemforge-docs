@@ -89,6 +89,18 @@ gemforge deploy <target> --reset
 
 This will remove all non-core facet selectors from the existing on-chain Diamond as a first step, thus causing the current facet contracts to be deployed to the diamond afresh. The existing deployment record for the Diamond contract will remain unchanged, but facet deployment records will be replaced.
 
+## Dry runs
+
+Sometimes you may want to see what a deployment would do without actually going through with it. This is known as a _dry_ deployment and can be actioned using the `--dry` option. For example:
+
+```shell
+gemforge deploy <target> --dry
+```
+
+No actual deployments will take place but Gemforge will still output useful logging to tell you what it would do.
+
+The dry deployment option also works for when doing upgrades, resetting a diamond or doing a fresh deployment to the target.
+
 ## Custom scripts
 
 If you wish to run custom scripts during the deployment process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.
