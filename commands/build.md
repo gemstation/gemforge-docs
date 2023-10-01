@@ -21,6 +21,7 @@ The following files will be generated:
 * `DiamondProxy.sol` - the core diamond proxy contract which delegates to all of your facets. The constructor sets up the [core library facets](https://github.com/mudgen/diamond-2-hardhat/tree/main/contracts/facets), as well as a basic [ERC165](https://eips.ethereum.org/EIPS/eip-165) implementation.
 * `IDiamondProxy.sol` - the diamond proxy interface using which Dapps can execute facet methods on the on-chain contract.
 * `LibDiamondHelper.sol` - a library for use within Foundry tests for deploying the Diamond and its facets.
+* `abi.json` - a [unified ABI](../development/abi.md) consisting of `IDiamondProxy` exports, custom errors and events. This is needed for when interacting with the Diamond.
 * `facets.json` - a list of all facets and their exported methods - used by the [deploy](deploy.md) command.
 
 !!!
