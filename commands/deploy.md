@@ -101,6 +101,26 @@ No actual deployments will take place but Gemforge will still output useful logg
 
 The dry deployment option also works for when doing upgrades, resetting a diamond or doing a fresh deployment to the target.
 
+## Pause and resume
+
+When doing deployments it's possible to pause the flow and save the state to file, to be resumed later. This is useful if e.g you have a custom authentication flow which requires you to approve upgrades.
+
+To pause a deployment:
+
+```shell
+gemforge deploy <target> --pause-cut-to-file cut.json
+```
+
+Running this command will deploy all the proxy and facet contracts, but the [diamondCut()](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol#L22) method will not be called. The `cut.json` file will contain the array of facet cuts that would be passed to the proxy to complete the deployment/upgrade.
+
+To resume the deployment at any point, run:
+
+```shell
+gemforge deploy <target> --resume-cut-from-file cut.json
+```
+
+_Note: Post-build [hooks](../configuration/hooks.md) will only be called if the resume step succeeds. These hooks will not be called for the pause step_.
+
 ## Custom scripts
 
 If you wish to run custom scripts during the deployment process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.
