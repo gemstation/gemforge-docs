@@ -10,7 +10,6 @@ To ensure things run smoothly we recommend adhering to the following rules:
 
 * Each facet should be named `<anything you want>Facet` and be contained in its own file called `<anything you want>Facet.sol` in the same folder as all of your other facet files.
   * _Note: This naming pattern assumes you are using a matching [facet source path pattern](../configuration/paths.md)_.
-* Do NOT use the same facet names as the [core facets](../configuration/diamond.md).
 * Do NOT use [function polymorphism](https://medium.com/coinmonks/solidity-and-object-oriented-programming-oop-191f8deb8316). Instead, ensure every function is uniquely named.
 
 ## Directory tree
@@ -27,6 +26,16 @@ As seen in the [demo repos](../frameworks.md), we recommend the following direct
 ```
 
 This wil help keep your code neatly organized and easy to navigate.
+
+## Core facets
+
+You can override [core facets](../configuration/diamond.md) with your own, in case you need to customize the default upgrade and ownership mechanisms. 
+
+Be very careful when doing this, however, as you do not want to introduce bugs which disrupt either of these critical mechanisms.
+
+!!!
+For saftey reasons, **Gemforge will not remove methods from core facets**. They can only be added or replaced. To remove an old core facet method simply replace it with a dummy method with the same function signature.
+!!!
 
 ## Shared code - base contract
 

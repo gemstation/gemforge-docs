@@ -72,3 +72,29 @@ module.exports = {
 }
 ```
 
+## Initialization during an upgrade
+
+Sometimes you may wish to run some initialization code during an upgrade. To do this will require using the ["pause and resume"](../commands/deploy.md) deployment flow. 
+
+When pausing a deployment a JSON file is created that contains the data for the `diamondCut()` call, e.g:
+
+```js
+{
+  "cuts": [
+    {
+      "facetAddress": "0x0000000000000000000000000000000000000000",
+      "action": 2,
+      "functionSelectors": [
+        "0xbf9f7311"
+      ]
+    },
+    // ...
+ ],
+  "initContractAddress": "0x0000000000000000000000000000000000000000",
+  "initData": "0x"
+}
+```
+
+The `initContractAddress` and `initData` values get passed to the `diamondCut()` call. By modifying them you can run custom initialization code when the deployment is resumed. 
+
+_Note: The `initData` value must the ABI-encoded function selector and arguments to be passed to it._

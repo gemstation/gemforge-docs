@@ -111,7 +111,25 @@ To pause a deployment:
 gemforge deploy <target> --pause-cut-to-file cut.json
 ```
 
-Running this command will deploy all the proxy and facet contracts, but the [diamondCut()](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol#L22) method will not be called. The `cut.json` file will contain the array of facet cuts that would be passed to the proxy to complete the deployment/upgrade.
+Running this command will deploy all the proxy and facet contracts, but the [diamondCut()](https://github.com/mudgen/diamond-2-hardhat/blob/main/contracts/facets/DiamondCutFacet.sol#L22) method will not be called. The `cut.json` file will contain the array of facet cuts that would be passed to the proxy to complete the deployment/upgrade, e.g:
+
+
+```js
+{
+  "cuts": [
+    {
+      "facetAddress": "0x0000000000000000000000000000000000000000",
+      "action": 2,
+      "functionSelectors": [
+        "0xbf9f7311"
+      ]
+    },
+    // ...
+ ],
+  "initContractAddress": "0x0000000000000000000000000000000000000000",
+  "initData": "0x"
+}
+```
 
 To resume the deployment at any point, run:
 
