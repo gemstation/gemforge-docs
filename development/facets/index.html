@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.751993449711">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.752334546414">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -33,12 +33,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.751993449711" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.752334546414" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.751993449711" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.752334546414" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.751993449711" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.751993449711" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.752334546414" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.752334546414" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -197,7 +197,6 @@
 <li><em>Note: This naming pattern assumes you are using a matching <a href="../../configuration/paths/">facet source path pattern</a></em>.</li>
 </ul>
 </li>
-<li>Do NOT use the same facet names as the <a href="../../configuration/diamond/">core facets</a>.</li>
 <li>Do NOT use <a href="https://medium.com/coinmonks/solidity-and-object-oriented-programming-oop-191f8deb8316">function polymorphism</a>. Instead, ensure every function is uniquely named.</li>
 </ul>
 <doc-anchor-target id="directory-tree">
@@ -216,6 +215,31 @@
 ./shared # shared code - base contract, structs, etc</code></pre>
 </doc-codeblock></div>
 <p>This wil help keep your code neatly organized and easy to navigate.</p>
+<doc-anchor-target id="core-facets">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#core-facets">#</doc-anchor-trigger>
+        <span>Core facets</span>
+    </h2>
+</doc-anchor-target>
+<p>You can override <a href="../../configuration/diamond/">core facets</a> with your own, in case you need to customize the default upgrade and ownership mechanisms.</p>
+<p>Be very careful when doing this, however, as you do not want to introduce bugs which disrupt either of these critical mechanisms.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>For saftey reasons, <strong>Gemforge will not remove methods from core facets</strong>. They can only be added or replaced. To remove an old core facet method simply replace it with a dummy method with the same function signature.</p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="shared-code---base-contract">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#shared-code---base-contract">#</doc-anchor-trigger>
