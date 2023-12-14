@@ -26,14 +26,12 @@ module.exports = {
       }
     },
     wallet2: {
-      // Wallet type - mnemonic
-      type: 'mnemonic',
+      // Wallet type - private key
+      type: 'private-key',
       // Wallet config
       config: {
-        // Mnemonic phrase
-        words: () => process.env.MNEMONIC,
-        // 0-based index of the account to use
-        index: 0,
+        // Private key
+        key: '0x....',
       },
     },
     // ...
@@ -44,8 +42,18 @@ module.exports = {
 }
 ```
 
-The `words` config parameter for `mnemonic` wallets can either be a string of words or a method which returns the same.
+The `words` config parameter for `mnemonic` wallets can either be a string of words or a method which returns the same, e.g:
 
-!!!
-Note: At present only the `mnemonic` wallet type is supported. We aim to add more wallet types in future.
-!!!
+```js
+config: {
+  words: () => 'my mnemonic ...'
+}
+```
+
+The same applies to the `key` config parameter for `private-key` wallets:
+
+```js
+config: {
+  key: () => '0x...'
+}
+```
