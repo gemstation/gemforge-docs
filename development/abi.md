@@ -2,7 +2,7 @@
 order: -5
 ---
 
-# ABI
+# ABI generation
 
 The [build](../commands/build.md) command will auto-generate an [ABI](https://docs.soliditylang.org/en/v0.8.21/abi-spec.html) for the Diamond. The ABI will be stored in `abi.json`, next to the [generated Diamond proxy code](../configuration/paths.md).
 
