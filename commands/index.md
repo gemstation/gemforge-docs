@@ -1,6 +1,7 @@
 ---
 icon: terminal
 order: -3
+expanded: true
 ---
 
 All Gemforge commands are executed by running `gemforge <command name>` in a terminal.

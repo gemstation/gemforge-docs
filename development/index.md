@@ -1,6 +1,7 @@
 ---
 icon: git-branch
 order: -5
+expanded: true
 ---
 
 # Development

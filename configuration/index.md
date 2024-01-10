@@ -1,6 +1,7 @@
 ---
 icon: gear
 order: -4
+expanded: true
 ---
 
 The Gemforge configuration file - `gemforge.config.cjs` - tells how Gemforge how to understand your project layout and what actions to take.
