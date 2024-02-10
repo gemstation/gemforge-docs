@@ -79,7 +79,7 @@ You can bypass Gemforge's default behaviour and force a fresh deployment of the 
 gemforge deploy <target> --new
 ```
 
-This will force a new deployment of the Diamond and associated facets, disregarding any existing on-chain Diamond. Existing deployment srecord for the Diamond contract as well as facets will be replaced with new ones.
+This will force a new deployment of the Diamond and associated facets, disregarding any existing on-chain Diamond. Existing deployment records for the Diamond contract as well as facets will be replaced with new ones.
 
 Sometimes you may simply wish to reset an existing Diamond to a fresh state, i.e. replace all of its selectors with the current facet build output. To do this you can use the `--reset` argument:
 
