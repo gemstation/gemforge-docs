@@ -1,0 +1,23 @@
+<script type="text/javascript" defer>
+  const setOgImage = () => {
+    const exists = document.querySelector('meta[property="og:image"]');
+    if (exists) {
+      return
+    }
+    const meta = document.createElement('meta');
+    meta.setAttribute('property', 'og:image');
+    meta.setAttribute('content', '/static/gemforge_social_preview.png')
+    document.getElementsByTagName('head')[0].appendChild(meta);
+  }
+
+  window.addEventListener('load', () => {
+    setOgImage();
+
+    new MutationObserver(() => {
+      setOgImage();
+    }).observe(
+      document.querySelector('html'),
+      { subtree: true, characterData: true, childList: true }
+    )
+  })
+</script>
