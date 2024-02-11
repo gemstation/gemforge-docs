@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760859814851">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760979324693">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.760859814851" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.760979324693" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760859814851" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760979324693" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760859814851" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760859814851" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760979324693" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760979324693" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -258,6 +258,13 @@ module.exports = {
 <p>You can deploy the factory yourself on a new chain please ensure there are enough funds in the deploying wallet and then send the following raw signed transaction to the chain:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">0xf903f68085174876e800830557308080b903a3608060405234801561000f575f80fd5b506103868061001d5f395ff3fe608060405260043610610028575f3560e01c806350f1c4641461002c578063cdcb760a14610074575b5f80fd5b348015610037575f80fd5b5061004b61004636600461020e565b610087565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b61004b61008236600461027d565b6100ea565b6040517fffffffffffffffffffffffffffffffffffffffff000000000000000000000000606084901b166020820152603481018290525f906054016040516020818303038152906040528051906020012091506100e382610147565b9392505050565b6040517fffffffffffffffffffffffffffffffffffffffff0000000000000000000000003360601b166020820152603481018390525f906054016040516020818303038152906040528051906020012092506100e383833461019c565b5f604051305f5260ff600b53826020527f21c35dbe1b344a2488cf3321d6ce542f8e9f305544ff09e4993a62319a497c1f6040526055600b20601452806040525061d6945f52600160345350506017601e2090565b5f6f67363d3d37363d34f03d5260086018f35f52836010805ff5806101c85763301164255f526004601cfd5b8060145261d6945f5260016034536017601e2091505f8085516020870186855af16101fa576319b991a85f526004601cfd5b50803b6100e3576319b991a85f526004601cfd5b5f806040838503121561021f575f80fd5b823573ffffffffffffffffffffffffffffffffffffffff81168114610242575f80fd5b946020939093013593505050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b5f806040838503121561028e575f80fd5b82359150602083013567ffffffffffffffff808211156102ac575f80fd5b818501915085601f8301126102bf575f80fd5b8135818111156102d1576102d1610250565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0908116603f0116810190838211818310171561031757610317610250565b8160405282815288602084870101111561032f575f80fd5b826020860160208301375f602084830101528095505050505050925092905056fea2646970667358221220992118230e4c9ffed4926da567e9fee8d8a102c65d41aa5ee3579d36ca97124164736f6c634300081500331ba03333333333333333333333333333333333333333333333333333333333333333a03333333333333333333333333333333333333333333333333333333333333333</code></pre>
+</doc-codeblock></div>
+<p>The ABI of the deployed factory is:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-solidity"><code v-pre class="language-solidity">/** Deploy a contract using the given salt value, with msg.sender as the deployer. */
+function deploy(bytes32 salt, bytes memory creationCode) external payable returns (address deployed);
+/** Calcualate the address at which the following deployer wallet and salt value would deploy a contract. */
+function getDeployed(address deployer, bytes32 salt) external view returns (address deployed);</code></pre>
 </doc-codeblock></div>
 
                                 
