@@ -24,6 +24,5 @@ Gemforge only supports Solidity. Other EVM languages are not currently supported
 
 ## Who is using Gemforge?
 
-* [WarMosaic](https://github.com/WarMosaic/contracts)
 * [Nayms](https://github.com/nayms/contracts-v3)
 * [Tribally Games](https://github.com/Tribally-Games/contracts)
