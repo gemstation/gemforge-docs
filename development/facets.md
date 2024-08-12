@@ -10,7 +10,7 @@ To ensure things run smoothly we recommend adhering to the following rules:
 
 * Each facet should be named `<anything you want>Facet` and be contained in its own file called `<anything you want>Facet.sol` in the same folder as all of your other facet files.
   * _Note: This naming pattern assumes you are using a matching [facet source path pattern](../configuration/paths.md)_.
-* Do NOT use [function polymorphism](https://medium.com/coinmonks/solidity-and-object-oriented-programming-oop-191f8deb8316). Instead, ensure every function is uniquely named.
+* [Function polymorphism](https://medium.com/coinmonks/solidity-and-object-oriented-programming-oop-191f8deb8316) is only supported for functions which don't have any struct parameters ([read more](https://github.com/gemstation/gemforge/pull/40#issuecomment-2284272273)).
 
 ## Directory tree
 
