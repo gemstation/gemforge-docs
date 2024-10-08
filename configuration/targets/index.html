@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.776873283719">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.781688172844">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 3.5.0">
+    <meta name="generator" content="Retype 3.6.0">
 
     <!-- Primary Meta Tags -->
     <title>Targets | Gemforge</title>
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.776873283719" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.781688172844" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.776873283719" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.776873283719" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.776873283719" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.781688172844" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.781688172844" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.781688172844" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -232,7 +232,7 @@ module.exports = {
         <span>CREATE3 salt</span>
     </h2>
 </doc-anchor-target>
-<p>The <code v-pre>create3Salt</code> value is a <code v-pre>&quot;0x&quot;</code> prefixed hex string of length <code v-pre>66</code> that is fed into the <a href="https://docs.ethers.org/v6/api/crypto/#keccak256">keccak256 function</a> to obtain the salt value to be used for <a href="https://ethereum-magicians.org/t/keyless-contract-deployment-with-create3/16025">keyless CREATE3 deployments</a> of the Diamond proxy contract.</p>
+<p>The <code v-pre>create3Salt</code> value is a <code v-pre>&quot;0x&quot;</code> prefixed hex string of length <code v-pre>66</code> that is to be used for <a href="https://ethereum-magicians.org/t/keyless-contract-deployment-with-create3/16025">keyless CREATE3 deployments</a> of the Diamond proxy contract.</p>
 <p>By setting this value you can ensure that your Diamond proxy contract is always deployed to the same address as long as the deployment wallet and salt value remain unchanged. And by using the same wallet and salt for every deployment target you can ensure that all deployments to all targets (and thus chains) are at the same address, making managing <a href="../../development/omni-chain-addresses/">omni-chain deployments</a> easy.</p>
 <p>If the salt value is empty or ommitted then Gemforge will create a random salt to use, meaning that fresh deployments of your Diamond proxy will always be at different addresses.</p>
 <p><em>Note: Only the Diamond proxy contract is deployed using <code v-pre>CREATE3</code>. Facet contracts are deployed normally.</em></p>
