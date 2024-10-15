@@ -89,6 +89,24 @@ gemforge deploy <target> --reset
 
 This will remove all non-core facet selectors from the existing on-chain Diamond as a first step, thus causing the current facet contracts to be deployed to the diamond afresh. The existing deployment record for the Diamond contract will remain unchanged, but facet deployment records will be replaced.
 
+## Custom upgrade initializations
+
+Sometimes it's useful to be able to run "initialization" code during an upgrade of your existing Diamond, similar to the [code that gets run during a fresh deployment](../development/initialization.md).
+
+To accomplish this with `--upgrade-init-*` parameters can be used:
+
+```shell
+gemforge deploy <target> 
+  --upgrade-init-contract <contract name> 
+  --upgrade-init-method <contract method name>
+```
+
+Gemforge will automatically check the passed-in details, deploy the named contract, and then execute the named method within the context of the Diamond. Note that the contract method must not take any arguments. 
+
+!!!
+You can "upgrade" your Diamond and run upgrade initialization code even if you're not making any changes to the facets!
+!!!
+
 ## Dry runs
 
 Sometimes you may want to see what a deployment would do without actually going through with it. This is known as a _dry_ deployment and can be actioned using the `--dry` option. For example:
