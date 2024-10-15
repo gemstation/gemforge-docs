@@ -98,7 +98,7 @@ We recommend placing such upgrade initialization code within the `init` subfolde
 ...
 ```
 
-We recommend that you use [storage variables](./storage.md) to keep track of whether a given upgrade initialization code has previously been executed. This will ensure you can't run the same code twice, thereby preventing any mistakes. For example:
+We also recommend that you use [storage variables](./storage.md) to keep track of whether a given upgrade initialization code has previously been executed. This will ensure you can't run the same code twice, thereby preventing any mistakes. For example:
 
 ```solidity
 // file: src/init/UpgradeInit1.sol
