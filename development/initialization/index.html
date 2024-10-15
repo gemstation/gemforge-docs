@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.781688172844">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.782294884294">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
 
     <!-- Primary Meta Tags -->
-    <title>Custom initialization | Gemforge</title>
-    <meta name="title" content="Custom initialization | Gemforge">
+    <title>Initialization | Gemforge</title>
+    <meta name="title" content="Initialization | Gemforge">
     <meta name="description" content="When deploying a Diamond for the first time, it's possible to run additional initialization code at the end of ">
 
     <!-- Canonical -->
@@ -19,24 +19,24 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gemforge.xyz/development/initialization/">
-    <meta property="og:title" content="Custom initialization | Gemforge">
+    <meta property="og:title" content="Initialization | Gemforge">
     <meta property="og:description" content="When deploying a Diamond for the first time, it's possible to run additional initialization code at the end of ">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gemforge.xyz/development/initialization/">
-    <meta property="twitter:title" content="Custom initialization | Gemforge">
+    <meta property="twitter:title" content="Initialization | Gemforge">
     <meta property="twitter:description" content="When deploying a Diamond for the first time, it's possible to run additional initialization code at the end of ">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.6.0.781688172844" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.782294884294" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.781688172844" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.782294884294" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.781688172844" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.781688172844" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.782294884294" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.782294884294" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -181,10 +181,10 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="custom-initialization" class="break-words">
+<doc-anchor-target id="initialization" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#custom-initialization">#</doc-anchor-trigger>
-        <span>Custom initialization</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initialization">#</doc-anchor-trigger>
+        <span>Initialization</span>
     </h1>
 </doc-anchor-target>
 <p>When deploying a Diamond for the first time, it&#x27;s possible to run additional initialization code at the end of <a href="https://github.com/mudgen/diamond-2/blob/master/contracts/facets/DiamondCutFacet.sol#L20">the cut call</a>, in order to setup your Diamond&#x27;s internal state.</p>
@@ -253,26 +253,46 @@ module.exports = {
         <span>Initialization during an upgrade</span>
     </h2>
 </doc-anchor-target>
-<p>Sometimes you may wish to run some initialization code during an upgrade. To do this will require using the <a href="../../commands/deploy/">&quot;pause and resume&quot;</a> deployment flow.</p>
-<p>When pausing a deployment a JSON file is created that contains the data for the <code v-pre>diamondCut()</code> call, e.g:</p>
+<p>Sometimes you may wish to run some initialization code during an upgrade. To do this you can use the <a href="../../commands/deploy/"><code v-pre>--upgrade-init-*</code> parameters</a> as follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-javascript"><code v-pre class="language-javascript">{
-  &quot;cuts&quot;: [
-    {
-      &quot;facetAddress&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,
-      &quot;action&quot;: 2,
-      &quot;functionSelectors&quot;: [
-        &quot;0xbf9f7311&quot;
-      ]
-    },
-    // ...
- ],
-  &quot;initContractAddress&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,
-  &quot;initData&quot;: &quot;0x&quot;
+<pre class="language-bash"><code v-pre class="language-bash">gemforge deploy &lt;target&gt;
+  --upgrade-init-contract &lt;contract name&gt; 
+  --upgrade-init-method &lt;contract method name&gt;</code></pre>
+</doc-codeblock></div>
+<p>Gemforge will automatically check the passed-in details, deploy the named contract, and then execute the named method within the context of the Diamond. <strong>Note: It is expected that the contract method takes no arguments.</strong></p>
+<p>We recommend placing such upgrade initialization code within the <code v-pre>init</code> subfolder, alongside your initialization code for fresh deployments:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">/init    &lt;--- here
+  init/InitDiamond    &lt;-- to run on fresh deployments
+  init/UpgradeInit1   &lt;-- the first upgrade initialization
+  init/UpgradeInit2   &lt;-- the second upgrade initialization
+  init/...
+/facets
+/shared
+/generated 
+...</code></pre>
+</doc-codeblock></div>
+<p>We recommend that you use <a href="../storage/">storage variables</a> to keep track of whether a given upgrade initialization code has previously been executed. This will ensure you can&#x27;t run the same code twice, thereby preventing any mistakes. For example:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-solidity"><code v-pre class="language-solidity">// file: src/init/UpgradeInit1.sol
+
+// SPDX-License-Identifier: MIT
+pragma solidity &gt;=0.8.21;
+
+import { AppStorage, LibAppStorage } from &quot;../libs/LibAppStorage.sol&quot;;
+
+contract UpgradeInit1 {
+  function init() external {
+    AppStorage storage s = LibAppStorage.diamondStorage();
+    if (s.upgradeInit1Executed) {
+      revert(&quot;UpgradeInit1 already executed&quot;);
+    }
+    s.upgradeInit1Executed = true;
+
+    // do more stuff here...
+  }
 }</code></pre>
 </doc-codeblock></div>
-<p>The <code v-pre>initContractAddress</code> and <code v-pre>initData</code> values get passed to the <code v-pre>diamondCut()</code> call. By modifying them you can run custom initialization code when the deployment is resumed.</p>
-<p><em>Note: The <code v-pre>initData</code> value must the ABI-encoded function selector and arguments to be passed to it.</em></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -348,6 +368,6 @@ module.exports = {
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Custom initialization", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Initialization", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
