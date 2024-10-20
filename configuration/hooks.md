@@ -48,8 +48,6 @@ module.exports = {
 console.log(`Deployed target: ${process.env.GEMFORGE_DEPLOY_TARGET}`);
 ```
 
-See the section on [verifying your contracts on Etherscan](../development/etherscan.md) for a more detailed example of hooks.
-
 !!!
 If any of the hook scripts fail to execute properly or throw an error then Gemforge will also throw an error.
 !!!

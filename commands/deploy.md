@@ -160,5 +160,3 @@ _Note: Post-build [hooks](../configuration/hooks.md) will only be called if the 
 ## Custom scripts
 
 If you wish to run custom scripts during the deployment process, then this can be accomplished using [hooks](../configuration/hooks.md). Hooks are custom scripts written in a language of your choice which execute pre- and/or post-deployment.
-
-See the section on [verifying your contracts on Etherscan](../development/etherscan.md) for an example of hooks in action.

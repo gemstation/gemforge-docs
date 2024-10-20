@@ -18,12 +18,26 @@ module.exports = {
       // RPC endpoint URL
       rpcUrl: 'http://localhost:8545',
     },
-    // Sepolia test network
-    sepolia: {
+    // Base Sepolia test network
+    base_sepolia: {
       // RPC endpoint URL
-      rpcUrl: () => process.env.SEPOLIA_RPC_URL,
-    }
-  }
+      rpcUrl: () => process.env.BASE_SEPOLIA_RPC_URL,
+      // OPTIONAL: Contract source code verification - takes place as soon as any contract is deployed by Gemforge
+      contractVerification: {
+        // if using Foundry
+        foundry: {
+          // URL to block explorer contract source submission API
+          apiUrl: 'https://api-sepolia.basescan.org/api',
+          // secret API key to use when submitting
+          apiKey: () => process.env.BASESCAN_API_KEY,
+        },
+        // if using Hardhat
+        hardhat: {
+          networkId: 'baseSepolia' // name of network as defined in hardhat config file
+        },
+      },
+    },
+  },
   ...
 }
 ```
