@@ -4,7 +4,7 @@ order: -4
 
 # Source-code verification
 
-Gemforge has **built-in support** for getting your deployed contracts verified with source-code on Etherscan and similar block explorers.
+The [verify command](../commands/verify.md) enables you to get your deployed contracts' source-code verified on Etherscan and similar block explorers.
 
 This will give people confidence in knowing what your contracts actually do and also allow for direct interaction via a block explorer.
 
