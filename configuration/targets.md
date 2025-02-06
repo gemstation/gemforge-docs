@@ -36,6 +36,11 @@ module.exports = {
       initArgs: [],
       // OPTIONAL - CREATE3 salt. If empty or ommitted a random SALT is used.
       create3Salt: '0x...'
+      // OPTIONAL - Configuration for upgrades
+      upgrades: {
+        // Whether Gemforge should skip the diamondCut() call so that it can be done manually.
+        manualCut: true
+      }
     }
   }
   ...
@@ -60,4 +65,37 @@ If the salt value is empty or ommitted then Gemforge will create a random salt t
 
 _Note: Only the Diamond proxy contract is deployed using `CREATE3`. Facet contracts are deployed normally._
 
+## Upgrades configuration
 
+When upgrading an existing Diamond, you may - for security reasons - wish to perform the final upgrade call manually instead of having Gemforge do it automatically. For example:
+
+* You wish to double-check the effect of an upgrade prior to running it in production.
+* You changed the owner of the deployed Diamond to be a [multisig wallet](../development/multisig.md).
+
+To enable this, the `upgrades` property can be set:
+
+```js
+  targets: {
+    // Target named "main"
+    main: {
+      upgrades: {
+        // Whether the diamondCut() call will be done manually.
+        manualCut: true
+      }
+    }
+  }
+```
+
+By setting `manualCut` to `true` Gemforge will not call `diamondCut()` but will instead output the raw transaction data so that you can call it yourself. It will look something like this in the console output:
+
+```shell
+GEMFORGE: Outputting upgrade tx params and skipping actual tx call...
+
+GEMFORGE: ================================================================================
+
+GEMFORGE: Diamond: 0x3351cb6fD12655854DDAa85b0D9857d3e20a1310
+
+GEMFORGE: Tx data: 0x1f931c1c0000000...00000000000000000
+
+GEMFORGE: ================================================================================
+```
