@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.785996504996">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.792166209722">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.6.0.785996504996" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.792166209722" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.785996504996" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.792166209722" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.785996504996" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.785996504996" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.792166209722" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.792166209722" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -216,6 +216,11 @@ module.exports = {
       initArgs: [],
       // OPTIONAL - CREATE3 salt. If empty or ommitted a random SALT is used.
       create3Salt: '0x...'
+      // OPTIONAL - Configuration for upgrades
+      upgrades: {
+        // Whether Gemforge should skip the diamondCut() call so that it can be done manually.
+        manualCut: true
+      }
     }
   }
   ...
@@ -236,6 +241,41 @@ module.exports = {
 <p>By setting this value you can ensure that your Diamond proxy contract is always deployed to the same address as long as the deployment wallet and salt value remain unchanged. And by using the same wallet and salt for every deployment target you can ensure that all deployments to all targets (and thus chains) are at the same address, making managing <a href="../../development/omni-chain-addresses/">omni-chain deployments</a> easy.</p>
 <p>If the salt value is empty or ommitted then Gemforge will create a random salt to use, meaning that fresh deployments of your Diamond proxy will always be at different addresses.</p>
 <p><em>Note: Only the Diamond proxy contract is deployed using <code v-pre>CREATE3</code>. Facet contracts are deployed normally.</em></p>
+<doc-anchor-target id="upgrades-configuration">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#upgrades-configuration">#</doc-anchor-trigger>
+        <span>Upgrades configuration</span>
+    </h2>
+</doc-anchor-target>
+<p>When upgrading an existing Diamond, you may - for security reasons - wish to perform the final upgrade call manually instead of having Gemforge do it automatically. For example:</p>
+<ul>
+<li>You wish to double-check the effect of an upgrade prior to running it in production.</li>
+<li>You changed the owner of the deployed Diamond to be a <a href="../../development/multisig/">multisig wallet</a>.</li>
+</ul>
+<p>To enable this, the <code v-pre>upgrades</code> property can be set:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">  targets: {
+    // Target named &quot;main&quot;
+    main: {
+      upgrades: {
+        // Whether the diamondCut() call will be done manually.
+        manualCut: true
+      }
+    }
+  }</code></pre>
+</doc-codeblock></div>
+<p>By setting <code v-pre>manualCut</code> to <code v-pre>true</code> Gemforge will not call <code v-pre>diamondCut()</code> but will instead output the raw transaction data so that you can call it yourself. It will look something like this in the console output:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">GEMFORGE: Outputting upgrade tx params and skipping actual tx call...
+
+GEMFORGE: ================================================================================
+
+GEMFORGE: Diamond: 0x3351cb6fD12655854DDAa85b0D9857d3e20a1310
+
+GEMFORGE: Tx data: 0x1f931c1c0000000...00000000000000000
+
+GEMFORGE: ================================================================================</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -282,7 +322,7 @@ module.exports = {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024 <a href="https://gemforge.xyz">Gemforge</a>. All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2025 <a href="https://gemforge.xyz">Gemforge</a>. All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>
