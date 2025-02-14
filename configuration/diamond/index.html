@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.792166209722">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.792839529395">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.6.0.792166209722" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.792839529395" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.792166209722" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.792839529395" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.792166209722" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.792166209722" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.792839529395" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.792839529395" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -210,6 +210,19 @@ module.exports = {
       'DiamondCutFacet',
       'DiamondLoupeFacet',
     ],
+    // Function selectors that should NEVER be removed from the diamond.
+    // The default list is all the external methods of the default list of core facets defined above.
+    // NOTE: This is an array of function selectors, not method names.
+    protectedMethods: [
+      '0x8da5cb5b', // OwnershipFacet.owner()
+      '0xf2fde38b', // OwnershipFacet.transferOwnership()
+      '0x1f931c1c', // DiamondCutFacet.diamondCut()
+      '0x7a0ed627', // DiamondLoupeFacet.facets()
+      '0xcdffacc6', // DiamondLoupeFacet.facetAddress()
+      '0x52ef6b2c', // DiamondLoupeFacet.facetAddresses()
+      '0xadfca15e', // DiamondLoupeFacet.facetFunctionSelectors()
+      '0x01ffc9a7', // DiamondLoupeFacet.supportsInterface()
+    ],
   },
   ...
 }</code></pre>
@@ -234,6 +247,14 @@ module.exports = {
 <li><code v-pre>DiamondCut</code> - The upgrade mechanism for the diamond.</li>
 <li><code v-pre>Ownership</code> - Verification and transfer of diamond ownership.</li>
 </ul>
+<doc-anchor-target id="protected-methods">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#protected-methods">#</doc-anchor-trigger>
+        <span>Protected methods</span>
+    </h2>
+</doc-anchor-target>
+<p>Protected methods are similar to core facets in that they will NEVER be removed from the Diamond during an upgrade. This allows you to protect specific methods in your own facets. The default list contains the external methods in the core facets as additional protection.</p>
+<p>Note, however, that protected methods can still be overridden and replaced.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -247,7 +268,7 @@ module.exports = {
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p><strong>Unless you really know what you&#x27;re doing, we recommend leaving this array unchanged.</strong></p>
+<p><strong>Unless you really know what you&#x27;re doing, we recommend leaving <code v-pre>coreFacets</code> and <code v-pre>protectedMethods</code> unchanged.</strong></p>
         </div>
     </div>
 </div>
