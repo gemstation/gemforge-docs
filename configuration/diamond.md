@@ -28,6 +28,19 @@ module.exports = {
       'DiamondCutFacet',
       'DiamondLoupeFacet',
     ],
+    // Function selectors that should NEVER be removed from the diamond.
+    // The default list is all the external methods of the default list of core facets defined above.
+    // NOTE: This is an array of function selectors, not method names.
+    protectedMethods: [
+      '0x8da5cb5b', // OwnershipFacet.owner()
+      '0xf2fde38b', // OwnershipFacet.transferOwnership()
+      '0x1f931c1c', // DiamondCutFacet.diamondCut()
+      '0x7a0ed627', // DiamondLoupeFacet.facets()
+      '0xcdffacc6', // DiamondLoupeFacet.facetAddress()
+      '0x52ef6b2c', // DiamondLoupeFacet.facetAddresses()
+      '0xadfca15e', // DiamondLoupeFacet.facetFunctionSelectors()
+      '0x01ffc9a7', // DiamondLoupeFacet.supportsInterface()
+    ],
   },
   ...
 }
@@ -47,6 +60,13 @@ The default core facets in the config file are the ones provided by the [standar
 * `DiamondCut` - The upgrade mechanism for the diamond.
 * `Ownership` - Verification and transfer of diamond ownership.
 
+## Protected methods
+
+Protected methods are similar to core facets in that they will NEVER be removed from the Diamond during an upgrade. This allows you to protect specific methods in your own facets. The default list contains the external methods in the core facets as additional protection.
+
+Note, however, that protected methods can still be overridden and replaced.
+
 !!!
-**Unless you really know what you're doing, we recommend leaving this array unchanged.**
+**Unless you really know what you're doing, we recommend leaving `coreFacets` and `protectedMethods` unchanged.**
 !!!
+
